@@ -17,16 +17,14 @@ const initialCal = {
 export function Calculation(state = initialCal, action) {
   switch (action.type) {
     case EQUATE_NUM:
-        if (state.num1.includes(".")) {
-            console.log('running')
+      console.log(state.num1)
+        if (String(state.num1).includes(".") && action.payload === '.' && String(state.num2).includes('.') && action.payload === ('.')) {
+            console.log('num1 ka .')
             console.log(state)
-            return state;
-          }else if (state.num2.includes(".")) {
-            console.log('not running')
             return state
-          }
-          
-          if (state.num1 !== "" && state.sign !== "") {
+        }
+        
+         if (state.num1 !== "" && state.sign !== "") {
         return { ...state, num2: state.num2 + action.payload };
       } else {
         return {
@@ -84,60 +82,40 @@ export function Calculation(state = initialCal, action) {
       };
 
     case CLEAR:
-      //    if(state.num2 === '' && state.sign === ''){
-      //     const pre = [...state.num1]
-      //     pre.splice(pre.length - 1, 1)
-
-      //     console.log({pre})
-      //     return {
-      //         ...state,
-      //         num1: pre,
-      //     }
-      //    }else if(state.num2){
-      //     const preNum = [...state.num2]
-      //     preNum.splice(preNum.length - 1, 1)
-      //     console.log({preNum})
-      //     return{
-      //         ...state,
-      //         num2: preNum
-      //     }
-      //    }else if(state.num2 ==='' && state.num1 !== ''){
-      //     const preSign = [...state.sign]
-      //     preSign.splice(preSign.length - 1, 1)
-      //     console.log({preSign})
-      //     return {
-      //         ...state,
-      //         sign: preSign
-      //     }
-      //    }
+      if(state.num1 === ''){
+        return state
+      }
       if (state.num2) {
-          console.log("state.num2",state.num2);
-        const preNum = [...state.num2];
-        preNum.splice(preNum.length - 1, 1);
+        const preNum = state.num2;
+        const sts =preNum.slice(0,-1);
+        console.log('num2',{sts})
         return {
           ...state,
-          num2: preNum[0],
+          num2: sts,
         };
-      } else if (state.sign) {
+      } else if (state.sign && !state.num2) {
         console.log("state.sign",state.sign);
 
-        const preNum = [...state.sign];
-        preNum.splice(preNum.length - 1, 1);
-        console.log({preNum})
+        const preNum = state.sign;
+        const signsts = preNum.slice(0,-1);
+        console.log({signsts});
+        console.log({...state})
         return {
           ...state,
-          sign: preNum[0],
+          sign: signsts,
         };
       } else if (state.num1) {
         console.log("state.num1",state.num1);
 
-        const preNum = [...state.num1];
-        preNum.splice(preNum.length - 1, 1);
+        const preNum = state.num1;
+        const numsts  = preNum.slice(0, -1);
+        console.log('num1',{numsts},{preNum})
         return {
           ...state,
-          num1: preNum[0],
+          num1:numsts,
         };
       }
+      break;
     default:
       return state;
   }

@@ -3,7 +3,7 @@ import './Calculator.css'
 import {useSelector,useDispatch} from  'react-redux'
 import Button from './Button'
 import OpertionButton from './OperationButton'
-import { sign, equateNum, addNum, subtract, multiply, divide, allclear, clear, decimal } from '../Actions/Action'
+import { sign, equateNum, addNum, subtract, multiply, divide, allclear, clear} from '../Actions/Action'
 
 
 
