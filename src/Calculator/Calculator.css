@@ -12,11 +12,11 @@
 @media only screen and (max-width: 768px){
     .cal{
         margin: auto;
-        width: 50%;
+        width: 40%;
     }
 }
 
-@media only screen and (max-width: 460px){
+@media only screen and (max-width: 430px){
     .cal{
         margin: 0px;
         width: 100%;
