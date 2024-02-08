@@ -2,7 +2,7 @@
     margin: auto;
     border: 1px solid #000;
     position:relative;
-    height: 500px;
+    height: 520px;
     width: 25%;
     background-color:#000;
     color: #fff;
@@ -26,7 +26,7 @@
 .button{
     border: 1px solid transparent;
     border-radius: 50%;
-    height: 70px;
+    height: 75px;
     font-size: 18px;
     font-weight: 700;
     /* width: 100%; */

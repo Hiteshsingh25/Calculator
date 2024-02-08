@@ -18,13 +18,16 @@ export default function Calculator(){
 
 
     const handleResult=()=>{
+        if(num2 === '' || num2 === '.'){
+            return null
+        }
         if(signs === '+'){
             dispatch(addNum())
         }else if(signs === '-'){
             dispatch(subtract())
         }else if(signs === '*'){
             dispatch(multiply())
-        }else if(signs === '%'){
+        }else if(signs === '÷'){
             dispatch(divide())
         }
     }
@@ -37,14 +40,22 @@ export default function Calculator(){
             </div>
             <div className='col-12'>
             <button className='clsbutton col-5' onClick={()=>dispatch(allclear())}>AC</button>
-            <button className='clsbutton col-4' onClick={()=>dispatch(clear())}>C</button>
+            <button 
+            className='clsbutton col-4' 
+            onClick={()=>{
+                if(num === 'Result is undefined'){
+                    dispatch(allclear())
+                }else if(num === Number(Infinity)){
+                    dispatch(allclear())
+                }else{ dispatch(clear())}
+                }}>C</button>
             {/* onClick={()=>dispatch(clear())} */}
             <OpertionButton 
-            value='%' 
+            value='÷' 
             onClick={()=>{
-                dispatch(sign('%'),handleResult())
+                dispatch(sign('÷'),handleResult())
                 // handleResult()
-                }}>%</OpertionButton>
+                }}>÷</OpertionButton>
             <Button value='1' onClick={()=>dispatch(equateNum('1'))}>1</Button>
             <Button value='2' onClick={()=>dispatch(equateNum('2'))}>2</Button>
             <Button value='3' onClick={()=>dispatch(equateNum('3'))}>3</Button>
@@ -76,15 +87,17 @@ export default function Calculator(){
             <Button value='0' onClick={()=>dispatch(equateNum('0'))}>0</Button>
             <Button value='.' 
             onClick={()=>{
+                if(num === ''){
+                    dispatch(equateNum('0.')) 
+                }else if(signs !== '' && num2 === ''){
+                    dispatch(equateNum('0.')) 
+                }else{
                 dispatch(equateNum('.'))            
-                }}>.</Button>
+                }}}>.</Button>
             <OpertionButton value='=' onClick={()=>handleResult()}>=</OpertionButton>
 
             </div>
            <div>
-           
-            
-            
             </div>
         </div>
         </>
